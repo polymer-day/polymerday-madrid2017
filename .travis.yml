@@ -1,0 +1,24 @@
+sudo: false
+language: node_js
+node_js:
+  - "6.1"
+sudo: false
+cache:
+  directories:
+    - node_modules
+install:
+  - npm install
+  - npm install -g bower
+  - bower install
+script:
+  - npm run build
+deploy:
+  provider: firebase
+  edge: true
+  skip_cleanup: true
+  token: "${FIREBASE_TOKEN}"
+  project: "${FIREBASE_PROJECT_ID}"
+  on:
+    branch: master
+notifications:
+  slack: "${SLACK_ACCOUNT}:${SLACK_TOKEN}#${SLACK_ROOM}"

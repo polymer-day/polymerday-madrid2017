@@ -1,0 +1,60 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="polymerday-section-title">
+
+  <template>
+
+    <style include="polymerday-classes">
+       :host {
+        display: block;
+        text-align: center;
+        margin: 32px 0 38px;
+        padding: 0 24px;
+        line-height: normal;
+        color: var(--color-grey-primary);
+      }
+
+      .title--container h1 {
+        margin: 0 0 20px;
+      }
+      /* from 720px */
+
+      @media (min-width: 45em) {
+         :host {
+          margin: 50px 0 77px;
+        }
+
+        .title--container h1 {
+          margin: 0 0 20px;
+        }
+      }
+    </style>
+    <div class="title--container">
+      <h1 class="page-title">[[title]]</h1>
+    </div>
+    <div class="message--container">
+      <span class="page-subtitle">[[message]]</span>
+    </div>
+
+  </template>
+
+  <script>
+    class PolymerdaySectionTitle extends Polymer.Element {
+      static get is() {
+        return 'polymerday-section-title';
+      }
+      static get properties() {
+        return {
+          title: {
+            type: String
+          },
+          message: {
+            type: String
+          }
+        }
+      }
+    };
+    window.customElements.define(PolymerdaySectionTitle.is, PolymerdaySectionTitle);
+  </script>
+
+</dom-module>

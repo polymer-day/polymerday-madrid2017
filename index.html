@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+  <title>Polymer Day Madrid | 2017</title>
+  <meta name="description" content="Polymer Day Madrid, el evento en España centrado en los Web Components y la librería Polymer. ¿Te lo vas a perder?">
+
+  <!--
+    If deploying to a non-root path, replace href="/" with the full path to the project root.
+    For example: href="/polymer-starter-kit/relative-path-example/"
+  -->
+  <base href="/">
+
+  <link rel="icon" href="/images/favicon.ico">
+
+  <!-- See https://goo.gl/OOhYW5 -->
+  <link rel="manifest" href="/manifest.json">
+
+  <!-- See https://goo.gl/qRE0vM -->
+  <meta name="theme-color" content="#2c5ea5">
+
+  <!-- Add to homescreen for Chrome on Android. Fallback for manifest.json -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="Polymer Day">
+
+  <!-- Add to homescreen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="My App">
+
+  <!-- Homescreen icons -->
+  <link rel="apple-touch-icon" href="/images/manifest/icon-48x48.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/manifest/icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="96x96" href="/images/manifest/icon-96x96.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/manifest/icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="/images/manifest/icon-192x192.png">
+
+  <!-- Tile icon for Windows 8 (144x144 + tile color) -->
+  <meta name="msapplication-TileImage" content="/images/manifest/icon-144x144.png">
+  <meta name="msapplication-TileColor" content="#2c5ea5">
+  <meta name="msapplication-tap-highlight" content="no">
+
+  <meta property="og:url" content="https://www.polymerday.com">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Polymer Day Madrid | 2017">
+  <meta property="og:description" content="Polymer Day Madrid, el evento en España dedicado a los Web Components y Polymer. ¿Te lo vas a perder?">
+  <meta property="og:image" content="https://www.polymerday.com/images/polymer-day-promo-image.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@PolymerDay">
+  <meta name="twitter:title" content="Polymer Day Madrid | 2017">
+  <meta name="twitter:description" content="Polymer Day Madrid, el evento en España dedicado a los Web Components y Polymer. ¿Te lo vas a perder?">
+  <meta name="twitter:image" content="https://www.polymerday.com/images/polymer-day-promo-image.png">
+  <meta name="twitter:image:alt" content="Polymer Day Madrid | 2017">
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400|Roboto+Condensed" rel="stylesheet" type="text/css">
+  <script>
+    let lang = navigator.language || navigator.userLanguage || document.documentElement.lang;
+    if (['en', 'es'].indexOf(lang.substring(0, 2)) === -1) {
+      lang = 'en';
+    }
+    document.documentElement.lang = lang;
+
+    // Register the base URL
+    const baseUrl = document.querySelector('base').href;
+    // Load and register pre-caching Service Worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register(baseUrl + 'service-worker.js');
+      });
+    }
+
+  </script>
+
+  <!-- Load webcomponents-loader.js to check and load any polyfills your browser needs -->
+  <script src="bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+
+  <!-- Load your application shell -->
+  <link rel="import" href="/src/polymerday-app.html">
+
+  <style>
+    html {
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'Roboto', 'Roboto Condensed', sans-serif;
+      margin: 0;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <polymerday-app></polymerday-app>
+
+  <noscript>
+    Please enable JavaScript to view this website.
+  </noscript>
+
+</body>
+
+</html>

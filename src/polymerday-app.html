@@ -1,0 +1,309 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="../bower_components/paper-toast/paper-toast.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-fab/paper-fab.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
+<link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../bower_components/neon-animation/neon-animations.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-app.html">
+
+<link rel="import" href="polymerday-footer.html">
+<link rel="import" href="polymerday-icons.html">
+<link rel="import" href="polymerday-theme.html">
+<link rel="import" href="polymerday-classes.html">
+
+<link rel="lazy-import" href="polymerday-home.html">
+<link rel="lazy-import" href="polymerday-cookies.html">
+
+<dom-module id="polymerday-app">
+
+  <template>
+
+    <style include="iron-flex iron-flex-alignment polymerday-classes"></style>
+
+    <style>
+        :host {
+        position: relative;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        min-height: 100vh;
+        transition: opacity .5s;
+      }
+
+      app-drawer-layout:not([narrow]) [drawer-toggle] {
+        display: none;
+      }
+
+
+      app-drawer-layout {
+        -ms-flex: 1;
+        flex: 1;
+      }
+
+      app-header {
+        color: var(--color-white-primary);
+        height: 150px;
+        background-color: var(--color-blue-primary);
+      }
+
+      .logo {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+      }
+
+      app-header iron-icon {
+        --paper-icon-button-ink-color: white;
+        width: 64px;
+        height: 64px;
+      }
+
+      [main-title] {
+        margin: 0;
+        line-height: 1;
+      }
+
+      [main-title] img {
+        display: block;
+        width: 120px!important;
+      }
+
+      app-header paper-icon-button {
+        --paper-icon-button-ink-color: white;
+      }
+
+      app-toolbar.tall {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+      }
+
+      #drawer {
+        z-index: 1;
+        --app-drawer-content-container: {
+          background: var(--color-blue-primary);
+          color: var(--color-white-primary);
+          font-weight: 100;
+        }
+        --app-drawer-scrim-background: rgba(255, 255, 255, .7);
+      }
+
+      #drawer img {
+        max-width: 100%;
+      }
+
+      .drawer-list a {
+        @apply --text-normal-white;
+        display: block;
+        font-weight: bold;
+        line-height: 3.5;
+        outline: 0;
+        padding: 0 16px;
+        text-decoration: none;
+      }
+
+      .drawer-list a iron-icon {
+        width: 20px;
+        height: 20px;
+        margin-right: 16px;
+        color: rgba(0, 0, 0, 0.60);
+      }
+
+      .drawer-list a.iron-selected,
+      .drawer-list a.iron-selected iron-icon {
+        font-weight: 100;
+        background-color: var(--app-primary-color);
+        color: var(--app-background-color);
+      }
+
+      .drawer-list a:hover,
+      .drawer-list a:hover iron-icon,
+      .drawer-list a.iron-selected:hover,
+      .drawer-list a.iron-selected:hover iron-icon {
+        font-weight: 100;
+        background-color: var(--app-secondary-color);
+        color: var(--app-background-color);
+      }
+
+      .drawer-list a.subroute {
+        padding-left: 32px;
+      }
+
+      .menu-desktop {
+        display: none;
+      }
+
+      #cookiesPolicy {
+        width: 100%;
+        margin: 0;
+        --paper-toast-background-color: var(--color-blue-light);
+        --paper-toast-color: var(--color-blue-secondary);
+      }
+
+      #cookiesPolicy a {
+        color: var(--color-blue-secondary)
+      }
+
+      #cookiesPolicy paper-fab {
+        --paper-fab-background: var(--color-blue-primary);
+        position: absolute;
+        top: -2em;
+        right: 1em;
+        font-size: 0.8em;
+      }
+
+
+      @media (min-width: 45em) {
+        app-header paper-icon-button {
+          display: none;
+        }
+
+        [main-title] {
+          font-size: 36px;
+        }
+
+        [main-title] img {
+          width: 188px!important;
+        }
+
+        .menu-desktop {
+          display: block;
+        }
+      }
+
+    </style>
+
+    <app-location route="{{route}}"></app-location>
+    <app-route route="{{route}}" pattern="[[rootPattern]]:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
+
+
+    <app-drawer-layout force-narrow>
+
+      <!-- Drawer content -->
+      <app-drawer id="drawer" slot="drawer">
+        <!-- Menu -->
+        <app-toolbar>
+          <img src$="[[rootPath]]/images/logo-polymerday-white.svg" alt="Polymer Day" width="188" height="32">
+        </app-toolbar>
+      </app-drawer>
+
+      <!-- Main content -->
+      <app-header-layout>
+
+        <app-header slot="header" fixed condenses reveals effects="waterfall blend-background" role="banner">
+          <app-toolbar class="logo">
+            <h1 main-title><img src$="[[rootPath]]/images/logo-polymerday-white.svg" alt="Polymer Day" width="188" height="32"></h1>
+          </app-toolbar>
+        </app-header>
+
+        <iron-pages id="views" role="main" selected="[[page]]" attr-for-selected="name" role="main" fallback-selection="home">
+          <polymerday-home name="home"></polymerday-home>
+          <polymerday-cookies name="cookies"></polymerday-cookies>
+        </iron-pages>
+
+
+      </app-header-layout>
+
+    </app-drawer-layout>
+
+    <polymerday-footer></polymerday-footer>
+
+    <paper-toast id="cookiesPolicy" opened="[[cookiesPolicyOpened]]" duration="0">
+      <p inner-h-t-m-l="[[localize('cookies.text')]]"></p>
+      <paper-fab mini icon="close" on-click="cookiesPolicyClose" title="[[localize('cookies.close')]]"></paper-fab>
+    </paper-toast>
+
+  </template>
+
+  <script>
+    class PolymerdayApp extends Polymer.mixinBehaviors([Polymerday.AppLocalizeBehavior], Polymer.Element) {
+
+      static get is() {
+        return 'polymerday-app';
+      }
+      static get properties() {
+        return {
+            page: {
+              type: String,
+              reflectToAttribute: true,
+              observer: '_pageChanged',
+            },
+            rootPattern: String,
+            routeData: Object,
+            subroute: String,
+            cookiesPolicyOpened: {
+              type: Boolean,
+              value: function () {
+                return !localStorage.getItem('cookies-policy-accepted');
+              }
+            }
+          }
+      }
+
+      static get observers() {
+        return [
+          '_routePageChanged(routeData.page)'
+        ]
+      }
+
+      constructor() {
+        super();
+        // Get root pattern for app-route, for more info about `rootPath` see:
+        // https://www.polymer-project.org/2.0/docs/upgrade#urls-in-templates
+        this.rootPattern = (new URL(this.rootPath)).pathname;
+      }
+
+      _localizedTitle(name) {
+        return this.localize(name + '.title');
+      }
+
+      _routePageChanged(page) {
+        // Polymer 2.0 will call with `undefined` on initialization.
+        // Ignore until we are properly called with a string.
+        if (page === undefined) {
+          return;
+        }
+        // If no page was found in the route data, page will be an empty string.
+        // Deault to 'home' in that case.
+        this.page = page || 'home';
+        // Close a non-persistent drawer when the page & route are changed.
+        if (!this.$.drawer.persistent) {
+          this.$.drawer.close();
+        }
+      }
+
+      _pageChanged(page) {
+        // Load page import on demand. Show 404 page if fails
+        var resolvedPageUrl = this.resolveUrl('polymerday-' + page + '.html');
+        Polymer.importHref(
+          resolvedPageUrl,
+          null,
+          this._showPage404.bind(this),
+          true);
+      }
+      _showPage404() {
+        this.page = 'home';
+      }
+
+      cookiesPolicyClose() {
+        localStorage.setItem('cookies-policy-accepted', true);
+        this.$.cookiesPolicy.close();
+      }
+    };
+    window.customElements.define(PolymerdayApp.is, PolymerdayApp);
+  </script>
+
+</dom-module>
