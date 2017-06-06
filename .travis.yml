@@ -18,7 +18,6 @@ deploy:
   edge: true
   provider: firebase
   skip_cleanup: true
-  token: "${FIREBASE_TOKEN}"
   project: "${FIREBASE_PROJECT_ID}"
   on:
     tag: true
@@ -26,7 +25,6 @@ deploy:
   edge: true
   provider: firebase
   skip_cleanup: true
-  token: "${FIREBASE_TOKEN}"
   project: "${FIREBASE_PROJECT_ID_DEV}"
   on:
     branch: master
