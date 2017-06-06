@@ -57,15 +57,15 @@
     "web-component-tester": "^6.0.0"
   },
   "resolutions": {
-    "iron-icon": "^2.0.0",
     "polymer": "^2.0.0",
+    "iron-icon": "^2.0.0",
     "iron-flex-layout": "^2.0.0",
     "iron-iconset-svg": "^2.0.0",
-    "iron-selector": "^2.0.0",
-    "paper-styles": "^2.0.0",
+    "iron-meta": "^2.0.0",
     "iron-localstorage": "^2.0.0",
-    "webcomponentsjs": "^v1.0.0",
+    "iron-selector": "^2.0.0",
+    "webcomponentsjs": "^1.0.0",
     "google-apis": "2.0-preview",
-    "iron-resizable-behavior": "2.0-preview"
+    "iron-resizable-behavior": "1 - 2"
   }
 }
