@@ -6,19 +6,24 @@ sudo: false
 cache:
   directories:
     - node_modules
+    - bower_components
 install:
   - npm install
-  - npm install -g bower
-  - bower install
 script:
   - npm run build
 deploy:
   provider: firebase
-  edge: true
   skip_cleanup: true
   token: "${FIREBASE_TOKEN}"
   project: "${FIREBASE_PROJECT_ID}"
   on:
+    tag: true
+deploy:
+  provider: firebase
+  skip_cleanup: true
+  token: "${FIREBASE_TOKEN}"
+  project: "${FIREBASE_PROJECT_ID_DEV}"
+  on:
     branch: master
-notifications:
-  slack: "${SLACK_ACCOUNT}:${SLACK_TOKEN}#${SLACK_ROOM}"
+# notifications:
+#  slack: "${SLACK_ACCOUNT}:${SLACK_TOKEN}#${SLACK_ROOM}"
