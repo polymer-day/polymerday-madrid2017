@@ -2,33 +2,29 @@
   "entrypoint": "index.html",
   "shell": "src/polymerday-app.html",
   "fragments": [
-    "src/views/polymerday-home.html",
-    "src/views/polymerday-cookies.html"
+    "src/polymerday-home.html",
+    "src/polymerday-cookies.html"
   ],
-  "sourceGlobs": [
-   "src/**/*",
-   "images/**/*",
-   "bower.json"
+  "sources": [
+    "src/**/*",
+    "images/**/*",
+    "bower.json"
   ],
-  "includeDependencies": [
-    "manifest.json",
-    "bower_components/webcomponentsjs/*.js"
+  "extraDependencies": [
+    "manifest.json"
   ],
   "lint": {
     "rules": ["polymer-2"]
   },
-  "builds": [
-    {
-      "preset": "es5-bundled",
-      "basePath": true
-    },
-    {
-      "preset": "es6-bundled",
-      "basePath": true
-    },
-    {
-      "preset": "es6-unbundled",
-      "basePath": true
-    }
-  ]
+  "builds": [{
+    "name": "fallback",
+    "preset": "es5-bundled",
+    "basePath": false,
+    "browserCapabilities": []
+  }, {
+    "name": "modern",
+    "preset": "es6-unbundled",
+    "basePath": false,
+    "browserCapabilities": ["es2015", "push"]
+  }]
 }
