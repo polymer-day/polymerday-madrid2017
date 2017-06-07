@@ -15,18 +15,18 @@ install:
 script:
   - npm run build
 deploy:
-  edge: true
-  provider: firebase
-  skip_cleanup: true
-  project: "${FIREBASE_PROJECT_ID}"
-  on:
-    tag: true
-deploy:
-  edge: true
-  provider: firebase
-  skip_cleanup: true
-  project: "${FIREBASE_PROJECT_ID_DEV}"
-  on:
-    branch: master
+  - provider: firebase
+    edge: true
+    skip_cleanup: true
+    project: "${FIREBASE_PROJECT_ID}"
+    on:
+      branch: master
+      tag: true
+  - provider: firebase
+    edge: true
+    skip_cleanup: true
+    project: "${FIREBASE_PROJECT_ID_DEV}"
+    on:
+      branch: master
 # notifications:
 #  slack: "${SLACK_ACCOUNT}:${SLACK_TOKEN}#${SLACK_ROOM}"
