@@ -1,5 +1,7 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/lazy-imports/lazy-imports-mixin.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/paper-toast/paper-toast.html">
 <link rel="import" href="../bower_components/paper-fab/paper-fab.html">
 <link rel="import" href="../bower_components/app-route/app-location.html">
@@ -15,10 +17,9 @@
 <link rel="import" href="polymerday-theme.html">
 <link rel="import" href="polymerday-classes.html">
 
-<link rel="lazy-import" href="polymerday-home.html">
-<link rel="lazy-import" href="polymerday-cookies.html">
-
 <dom-module id="polymerday-app">
+  <link rel="lazy-import" group="home" href="polymerday-home.html">
+  <link rel="lazy-import" group="cookies" href="polymerday-cookies.html">
 
   <template>
 
@@ -179,7 +180,7 @@
     </style>
 
     <app-location route="{{route}}"></app-location>
-    <app-route route="{{route}}" pattern="[[rootPattern]]:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
+    <app-route route="{{route}}" pattern="/:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
 
 
     <app-drawer-layout force-narrow>
@@ -221,7 +222,7 @@
   </template>
 
   <script>
-    class PolymerdayApp extends Polymer.mixinBehaviors([Polymerday.AppLocalizeBehavior], Polymer.Element) {
+    class PolymerdayApp extends Polymer.LazyImportsMixin(Polymer.mixinBehaviors([Polymerday.AppLocalizeBehavior], Polymer.Element)) {
 
       static get is() {
         return 'polymerday-app';
@@ -256,6 +257,8 @@
         // Get root pattern for app-route, for more info about `rootPath` see:
         // https://www.polymer-project.org/2.0/docs/upgrade#urls-in-templates
         this.rootPattern = (new URL(this.rootPath)).pathname;
+        this._showPage404 = this._showPage404.bind(this);
+        this._pageLoaded = this._pageLoaded.bind(this);
       }
 
       _localizedTitle(name) {
@@ -279,12 +282,12 @@
 
       _pageChanged(page) {
         // Load page import on demand. Show 404 page if fails
-        var resolvedPageUrl = this.resolveUrl('polymerday-' + page + '.html');
-        Polymer.importHref(
-          resolvedPageUrl,
-          null,
-          this._showPage404.bind(this),
-          true);
+        this.importLazyGroup(page)
+          .then(this._pageLoaded)
+          .catch(this._showPage404);
+      }
+      _pageLoaded(results) {
+        this.dispatchEvent(new CustomEvent('import-loaded'), {detail: results});
       }
       _showPage404() {
         this.page = 'home';
