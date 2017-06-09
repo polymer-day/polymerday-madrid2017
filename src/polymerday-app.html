@@ -179,8 +179,13 @@
 
     </style>
 
-    <app-location route="{{route}}"></app-location>
-    <app-route route="{{route}}" pattern="/:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
+    <app-location
+      route="{{route}}"
+      url-space-regex="[[rootPath]]*"></app-location>
+    <app-route route="{{route}}"
+        pattern="[[rootPath]]:page"
+        data="{{routeData}}"
+        tail="{{subroute}}"></app-route>
 
 
     <app-drawer-layout force-narrow>
@@ -202,7 +207,11 @@
           </app-toolbar>
         </app-header>
 
-        <iron-pages id="views" role="main" selected="[[page]]" attr-for-selected="name" role="main" fallback-selection="home">
+        <iron-pages
+            selected="[[page]]"
+            attr-for-selected="name"
+            fallback-selection="home"
+            role="main">
           <polymerday-home name="home"></polymerday-home>
           <polymerday-cookies name="cookies"></polymerday-cookies>
         </iron-pages>
@@ -234,9 +243,11 @@
               reflectToAttribute: true,
               observer: '_pageChanged',
             },
-            rootPattern: String,
             routeData: Object,
             subroute: String,
+            // This shouldn't be neccessary, but the Analyzer isn't picking up
+            // Polymer.Element#rootPath
+            rootPath: String,
             cookiesPolicyOpened: {
               type: Boolean,
               value: function () {
@@ -254,15 +265,8 @@
 
       constructor() {
         super();
-        // Get root pattern for app-route, for more info about `rootPath` see:
-        // https://www.polymer-project.org/2.0/docs/upgrade#urls-in-templates
-        this.rootPattern = (new URL(this.rootPath)).pathname;
         this._showPage404 = this._showPage404.bind(this);
         this._pageLoaded = this._pageLoaded.bind(this);
-      }
-
-      _localizedTitle(name) {
-        return this.localize(name + '.title');
       }
 
       _routePageChanged(page) {
