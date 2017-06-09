@@ -7,7 +7,7 @@
     "tickets": "Entradas",
     "home.title": "Inicio",
     "home.date": "2017",
-    "home.intro": "<p><a href='https://www.youtube.com/channel/UC_HC2fqjzv3uUz7g30WFXKQ'>Después del éxito de la primera edición de PolymerDay</a>, ¡estamos ya preparando la segunda!.</p><p>En breve, os daremos más información acerca de este evento centrado en los Web Components y la librería Polymer.</p><p>¡Nos vemos pronto!</p>"
+    "home.intro": "<p><a href='https://www.youtube.com/channel/UC_HC2fqjzv3uUz7g30WFXKQ'>Después del éxito de la primera edición de PolymerDay</a>, ¡estamos ya preparando la segunda!.</p><p>En unos días, os daremos más información acerca de este evento centrado en los Web Components y la librería Polymer.</p><p>¡Nos vemos pronto!</p>"
   },
   "en": {
     "footer.registrationAt": "Registration at",
@@ -16,8 +16,7 @@
     "cookies.close": "Close",
     "tickets": "Tickets",
     "home.title": "Home",
-    "home.intro": "<p><a href='https://www.youtube.com/channel/UC_HC2fqjzv3uUz7g30WFXKQ'>Después del éxito de la primera edición de PolymerDay</a>, ¡estamos ya preparando la segunda!.</p><p>En breve, os daremos más información acerca de este evento centrado en los Web Components y la librería Polymer.</p><p>¡Nos vemos pronto!</p>",
     "home.date": "2017",
-    "home.banner":"Stay tuned for the video of the event!"
+    "home.intro": "<p><a href='https://www.youtube.com/channel/UC_HC2fqjzv3uUz7g30WFXKQ'>Afer the success of the first edition of PolymerDay</a>, we are already preparing the second!</p><p>In a few days, we will give you more information about this event centered on the Web Components and the Polymer library.</p><p>See you soon!</p>"
   }
 }
