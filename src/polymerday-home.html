@@ -115,6 +115,13 @@
         return 'polymerday-home';
       }
 
+      static get properties() {
+        return {
+          importPath: String,
+          localize: Function,
+        };
+      }
+
     }
 
     window.customElements.define(PolymerdayHome.is, PolymerdayHome);
