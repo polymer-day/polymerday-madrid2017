@@ -106,13 +106,16 @@
   </template>
 
   <script>
-    class PolymerdayHome extends Polymer.mixinBehaviors([Polymerday.AppLocalizeBehavior], Polymer.Element) {
+    class PolymerdayHome extends Polymer.mixinBehaviors(
+      [Polymerday.AppLocalizeBehavior],
+      Polymer.Element
+    ) {
 
       static get is() {
         return 'polymerday-home';
       }
 
-    };
+    }
 
     window.customElements.define(PolymerdayHome.is, PolymerdayHome);
   </script>

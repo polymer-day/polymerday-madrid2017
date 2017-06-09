@@ -105,11 +105,14 @@
 
   <script>
 
-    class PolymerdayFooter extends Polymer.mixinBehaviors([Polymerday.AppLocalizeBehavior], Polymer.Element) {
+    class PolymerdayFooter extends Polymer.mixinBehaviors(
+      [Polymerday.AppLocalizeBehavior],
+      Polymer.Element
+    ) {
       static get is() {
         return 'polymerday-footer';
       }
-    };
+    }
     window.customElements.define(PolymerdayFooter.is, PolymerdayFooter);
 
   </script>

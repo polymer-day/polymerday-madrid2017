@@ -231,7 +231,10 @@
   </template>
 
   <script>
-    class PolymerdayApp extends Polymer.LazyImportsMixin(Polymer.mixinBehaviors([Polymerday.AppLocalizeBehavior], Polymer.Element)) {
+    class PolymerdayApp extends Polymer.LazyImportsMixin(Polymer.mixinBehaviors(
+      [Polymerday.AppLocalizeBehavior],
+      Polymer.Element
+    )) {
 
       static get is() {
         return 'polymerday-app';
@@ -250,17 +253,17 @@
             rootPath: String,
             cookiesPolicyOpened: {
               type: Boolean,
-              value: function () {
+              value: function() {
                 return !localStorage.getItem('cookies-policy-accepted');
-              }
-            }
-          }
+              },
+            },
+          };
       }
 
       static get observers() {
         return [
-          '_routePageChanged(routeData.page)'
-        ]
+          '_routePageChanged(routeData.page)',
+        ];
       }
 
       constructor() {
@@ -301,7 +304,7 @@
         localStorage.setItem('cookies-policy-accepted', true);
         this.$.cookiesPolicy.close();
       }
-    };
+    }
     window.customElements.define(PolymerdayApp.is, PolymerdayApp);
   </script>
 
