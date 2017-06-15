@@ -19,15 +19,7 @@ script:
 deploy:
   - provider: firebase
     edge: true
-    skip_cleanup: true
-    project: "${FIREBASE_PROJECT_ID}"
-    on:
-      branch: master
-      tag: true
-  - provider: firebase
-    edge: true
-    skip_cleanup: true
-    project: "${FIREBASE_PROJECT_ID_DEV}"
+    project: 'if [ "$TRAVIS_TAG" ]; then ${FIREBASE_PROJECT_ID} else ${FIREBASE_PROJECT_ID_DEV} fi'
     on:
       branch: master
 # notifications:
