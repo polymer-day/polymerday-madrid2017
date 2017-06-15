@@ -3,15 +3,14 @@ language: node_js
 node_js:
   - "6.1"
 sudo: false
+env:
+  - PROJECT=[ "$TRAVIS_TAG" ] && ${FIREBASE_PROJECT_ID} || ${FIREBASE_PROJECT_ID_DEV}
 cache:
   directories:
     - node_modules
     - bower_components
 install:
-  - npm install -g bower
-  - npm install -g polymer-cli
   - npm install
-  - bower install
 before_script:
   - npm run lint
 script:
@@ -19,7 +18,8 @@ script:
 deploy:
   - provider: firebase
     edge: true
-    project: 'if [ "$TRAVIS_TAG" ]; then ${FIREBASE_PROJECT_ID} else ${FIREBASE_PROJECT_ID_DEV} fi'
+    skip_cleanup: true
+    project: "${PROJECT}"
     on:
       branch: master
 # notifications:

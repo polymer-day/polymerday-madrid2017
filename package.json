@@ -18,8 +18,19 @@
     "eslint-plugin-html": "^2.0.0"
   },
   "scripts": {
+    "postinstall": "bower -v || npm i -g bower && bower i && polymer --version || npm i -g polymer-cli",
     "lint": "npm run lint:javascript && polymer lint",
     "lint:javascript": "eslint . --ext js,html --ignore-path .gitignore",
-    "build": "polymer build"
+    "test": "polymer test",
+    "build": "polymer build",
+    "validate": "npm ls"
+  },
+  "pre-commit": [
+    "lint"
+  ],
+  "dependencies": {
+    "install": "^0.10.1",
+    "npm": "^5.0.3",
+    "precommit-hook": "^3.0.0"
   }
 }
