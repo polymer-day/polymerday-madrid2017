@@ -3,8 +3,6 @@ language: node_js
 node_js:
   - "6.1"
 sudo: false
-env:
-  - PROJECT=[ "$TRAVIS_TAG" ] && ${FIREBASE_PROJECT_ID} || ${FIREBASE_PROJECT_ID_DEV}
 cache:
   directories:
     - node_modules
@@ -15,11 +13,12 @@ before_script:
   - npm run lint
 script:
   - npm run build
+  - if [[ $TRAVIS_TAG == "" ]]; then FIREBASE_PROJECT_ID=$FIREBASE_PROJECT_ID_DEV; fi;
 deploy:
   - provider: firebase
     edge: true
     skip_cleanup: true
-    project: "${PROJECT}"
+    project: ${FIREBASE_PROJECT_ID}
     on:
       branch: master
 # notifications:
