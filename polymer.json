@@ -8,7 +8,8 @@
   "sources": [
     "src/**/*",
     "images/**/*",
-    "bower.json"
+    "bower.json",
+    "firebase.json"
   ],
   "extraDependencies": [
     "manifest.json",
