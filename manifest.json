@@ -2,7 +2,7 @@
   "name": "Polymer Day",
   "short_name": "Polymer Day",
   "description": "Polymer Day is the event focused on Google's Polymer Library and App's Toolbox in Spain. We we dedicate one day to talk about Web Components technology.",
-  "start_url": "/?homescreen=1",
+  "start_url": "/",
   "display": "standalone",
   "theme_color": "#2c5ea5",
   "background_color": "#FFFFFF",
