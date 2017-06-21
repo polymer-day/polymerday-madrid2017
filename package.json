@@ -1,6 +1,6 @@
 {
   "name": "polymer-day-web",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "The event focused on Google's Polymer Library and App's Toolbox in Spain. We will dedicate a day to talk about Web Components technology. More than 10 talks from developers who are using Polymer during long time and for real projects.",
   "repository": {
     "type": "git"
