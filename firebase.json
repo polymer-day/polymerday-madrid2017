@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "build/modern",
+    "public": "build/default",
     "rewrites": [
       {
         "source": "!/__/**",

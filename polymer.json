@@ -19,14 +19,8 @@
     "rules": ["polymer-2"]
   },
   "builds": [{
-    "name": "fallback",
-    "preset": "es5-bundled",
-    "basePath": false,
-    "browserCapabilities": []
-  }, {
-    "name": "modern",
-    "preset": "es6-unbundled",
-    "basePath": false,
-    "browserCapabilities": ["es2015", "push"]
+    "name": "default",
+    "preset": "es6-bundled",
+    "basePath": false
   }]
 }
