@@ -13,13 +13,21 @@ before_script:
   - npm run lint
 script:
   - npm run build
-  - if [[ $TRAVIS_TAG == "" ]]; then FIREBASE_PROJECT_ID=$FIREBASE_PROJECT_ID_DEV; fi;
 deploy:
   - provider: firebase
     edge: true
     skip_cleanup: true
+    project: ${FIREBASE_PROJECT_ID_DEV}
+    on:
+      branch: master
+      tags: false
+  - provider: firebase
+    edge: true
+    skip_cleanup: true
+    overwrite: true
     project: ${FIREBASE_PROJECT_ID}
     on:
       branch: master
+      tags: true
 # notifications:
 #  slack: "${SLACK_ACCOUNT}:${SLACK_TOKEN}#${SLACK_ROOM}"
